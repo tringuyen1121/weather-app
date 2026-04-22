@@ -81,6 +81,7 @@ export function HourlyForecast({ hourly, current }: HourlyForecastProps) {
 
       return (
         <HourlyCard
+          key={i}
           time={time}
           weather={weather}
           hourly={hourly}

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useGeocoding } from "../../hooks/useGeocoding";
 import type { Location } from "../../types/weather";
 import styles from "./SearchBar.module.scss";
@@ -16,6 +16,7 @@ const SearchBar = ({
 }: SearchBarProps) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,18 +25,59 @@ const SearchBar = ({
   const showDropdown =
     open && query.trim().length > 0 && (results.length > 0 || loading);
 
-  function handleSelect(loc: Location) {
-    onSelectLocation(loc);
-    setQuery("");
-    setOpen(false);
-  }
+  const onQueryChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(e.target.value);
+      setOpen(true);
+      setHighlightedIndex(-1);
+    },
+    [],
+  );
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Escape") {
+  const handleSelect = useCallback(
+    (loc: Location) => {
+      onSelectLocation(loc);
+      setQuery("");
       setOpen(false);
-      inputRef.current?.blur();
-    }
-  }
+    },
+    [onSelectLocation],
+  );
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!showDropdown) {
+        if (e.key === "Escape") {
+          setOpen(false);
+          inputRef.current?.blur();
+        }
+        return;
+      }
+
+      switch (e.key) {
+        case "Escape":
+          setOpen(false);
+          inputRef.current?.blur();
+          break;
+        case "ArrowDown":
+          setHighlightedIndex((prev) =>
+            prev < results.length - 1 ? prev + 1 : prev,
+          );
+          break;
+        case "ArrowUp":
+          setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+          break;
+        case "Enter":
+          e.preventDefault();
+          if (highlightedIndex >= 0 && highlightedIndex < results.length) {
+            handleSelect(results[highlightedIndex]);
+          }
+          break;
+        default:
+          break;
+      }
+    },
+    [showDropdown, results, highlightedIndex, handleSelect],
+  );
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -62,10 +104,7 @@ const SearchBar = ({
           className={styles.input}
           placeholder="Search for a city…"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setOpen(true);
-          }}
+          onChange={onQueryChange}
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           aria-label="Search city"
@@ -92,12 +131,16 @@ const SearchBar = ({
           role="listbox"
           aria-label="Location suggestions"
         >
-          {results.map((loc) => (
+          {results.map((loc, index) => (
             <li
               key={loc.id}
-              className={styles.option}
+              className={`${styles.option} ${
+                index === highlightedIndex ? styles.highlighted : ""
+              }`}
               role="option"
+              aria-selected={index === highlightedIndex}
               onMouseDown={() => handleSelect(loc)}
+              onMouseEnter={() => setHighlightedIndex(index)}
             >
               <span className={styles.optionName}>{loc.name}</span>
               <span className={styles.optionSub}>

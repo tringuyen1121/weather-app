@@ -94,6 +94,7 @@
   overflow-y: auto;
   padding: v.$space-2 0;
   animation: fadeDown 0.15s ease;
+  background-color: rgba(50, 50, 50, 0.7);
 }
 
 @keyframes fadeDown {
@@ -116,6 +117,10 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.12);
+  }
+
+  &.highlighted {
+    background: rgba(255, 255, 255, 0.18);
   }
 }
 
