@@ -98,27 +98,6 @@ npm run preview
 npx tsc --noEmit
 ```
 
-## Configuration
-
-No API keys are required — Open-Meteo is a free, open service.
-
-The only optional environment variable is used at build time for GitHub Pages deployment:
-
-| Variable         | Purpose                                                                                       | Example             |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------------------- |
-| `VITE_BASE_PATH` | Sets the Vite [`base`](https://vite.dev/config/shared-options.html#base) for sub-path hosting | `/weather-display/` |
-
-## Deployment (GitHub Pages)
-
-1. Push your code to a GitHub repository.
-2. In the repository settings, go to **Pages** → set source to **GitHub Actions**.
-3. Push to the `main` branch — the CI/CD workflow (`.github/workflows/ci.yml`) will automatically:
-   - Type-check the project
-   - Build with the correct `VITE_BASE_PATH`
-   - Deploy to GitHub Pages
-
-The deployed URL will be `https://<your-username>.github.io/<repo-name>/`.
-
 ## CI/CD Workflow
 
 ```
