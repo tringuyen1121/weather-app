@@ -1,0 +1,134 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.card {
+  @include m.glass-card(v.$radius-2xl);
+  padding: v.$space-8;
+  @include m.flex-col;
+  gap: v.$space-4;
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.location {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-2;
+}
+
+.locationIcon {
+  font-size: v.$font-size-lg;
+  margin-top: 2px;
+}
+
+.city {
+  font-size: v.$font-size-2xl;
+  font-weight: 700;
+  color: v.$text-primary;
+  line-height: 1.2;
+
+  @include m.md {
+    font-size: v.$font-size-3xl;
+  }
+}
+
+.region {
+  font-size: v.$font-size-sm;
+  color: v.$text-secondary;
+  margin-top: v.$space-1;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: v.$space-6;
+  margin: v.$space-2 0;
+}
+
+.icon {
+  font-size: 5rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+
+  @include m.md {
+    font-size: 7rem;
+  }
+}
+
+.tempBlock {
+  @include m.flex-col;
+  gap: v.$space-1;
+}
+
+.temp {
+  font-size: v.$font-size-6xl;
+  font-weight: 200;
+  color: v.$text-primary;
+  line-height: 1;
+  letter-spacing: -2px;
+
+  @include m.md {
+    font-size: v.$font-size-7xl;
+  }
+}
+
+.highLow {
+  font-size: v.$font-size-sm;
+  color: v.$text-secondary;
+  font-weight: 500;
+}
+
+.description {
+  font-size: v.$font-size-xl;
+  font-weight: 500;
+  color: v.$text-primary;
+}
+
+.datetime {
+  font-size: v.$font-size-sm;
+  color: v.$text-muted;
+}
+
+.quickStats {
+  display: flex;
+  gap: v.$space-6;
+  flex-wrap: wrap;
+  padding-top: v.$space-4;
+  border-top: 1px solid v.$glass-border;
+  margin-top: v.$space-2;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+.statIcon {
+  font-size: v.$font-size-xl;
+}
+
+.statLabel {
+  display: block;
+  font-size: v.$font-size-xs;
+  color: v.$text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  display: block;
+  font-size: v.$font-size-base;
+  font-weight: 600;
+  color: v.$text-primary;
+}

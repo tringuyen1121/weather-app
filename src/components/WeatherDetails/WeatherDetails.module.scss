@@ -1,0 +1,68 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.section {
+  @include m.flex-col;
+  gap: v.$space-4;
+}
+
+.heading {
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: v.$text-muted;
+  padding: 0 v.$space-2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-3;
+
+  @include m.sm {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include m.md {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  @include m.glass-card(v.$radius-xl);
+  @include m.glass-card-hover;
+  @include m.flex-col;
+  padding: v.$space-5;
+  gap: v.$space-1;
+  transition:
+    background v.$transition-base,
+    transform v.$transition-base,
+    box-shadow v.$transition-base;
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-bottom: v.$space-1;
+}
+
+.label {
+  font-size: v.$font-size-xs;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: v.$text-muted;
+}
+
+.value {
+  font-size: v.$font-size-xl;
+  font-weight: 700;
+  color: v.$text-primary;
+  line-height: 1.2;
+}
+
+.sub {
+  font-size: v.$font-size-xs;
+  color: v.$text-secondary;
+  margin-top: v.$space-1;
+}

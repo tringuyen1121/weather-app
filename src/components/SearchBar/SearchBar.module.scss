@@ -1,0 +1,133 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.inputRow {
+  @include m.glass-card(v.$radius-full);
+  @include m.flex-center;
+  gap: v.$space-3;
+  padding: v.$space-3 v.$space-4;
+  transition:
+    border-color v.$transition-base,
+    box-shadow v.$transition-base;
+
+  &:focus-within {
+    border-color: v.$glass-border-strong;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.searchIcon {
+  font-size: v.$font-size-base;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: v.$text-primary;
+  font-size: v.$font-size-base;
+  font-weight: 400;
+
+  &::placeholder {
+    color: v.$text-muted;
+  }
+}
+
+.geoBtn {
+  @include m.flex-center;
+  @include m.focus-ring;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: v.$radius-full;
+  font-size: v.$font-size-base;
+  transition:
+    background v.$transition-fast,
+    transform v.$transition-fast;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dropdown {
+  @include m.glass-card(v.$radius-lg);
+  @include m.custom-scrollbar;
+  position: absolute;
+  top: calc(100% + v.$space-2);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: v.$space-2 0;
+  animation: fadeDown 0.15s ease;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  @include m.flex-between;
+  padding: v.$space-3 v.$space-5;
+  cursor: pointer;
+  gap: v.$space-3;
+  transition: background v.$transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.optionName {
+  font-size: v.$font-size-base;
+  font-weight: 500;
+  color: v.$text-primary;
+}
+
+.optionSub {
+  font-size: v.$font-size-sm;
+  color: v.$text-muted;
+  @include m.truncate;
+  max-width: 180px;
+}

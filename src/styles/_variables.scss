@@ -1,0 +1,136 @@
+// ─── Typography ────────────────────────────────────────────────────────────────
+$font-family:
+  "Inter",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+$font-size-5xl: 3rem; // 48px
+$font-size-6xl: 4rem; // 64px
+$font-size-7xl: 5rem; // 80px
+
+// ─── Spacing ───────────────────────────────────────────────────────────────────
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+$space-10: 2.5rem;
+$space-12: 3rem;
+$space-16: 4rem;
+
+// ─── Border Radius ─────────────────────────────────────────────────────────────
+$radius-sm: 0.375rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+$radius-2xl: 2rem;
+$radius-full: 9999px;
+
+// ─── Glass Card ────────────────────────────────────────────────────────────────
+$glass-bg: rgba(255, 255, 255, 0.12);
+$glass-bg-hover: rgba(255, 255, 255, 0.18);
+$glass-bg-strong: rgba(255, 255, 255, 0.18);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-border-strong: rgba(255, 255, 255, 0.3);
+$glass-blur: blur(16px);
+$glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+
+// ─── Text ──────────────────────────────────────────────────────────────────────
+$text-primary: rgba(255, 255, 255, 1);
+$text-secondary: rgba(255, 255, 255, 0.75);
+$text-muted: rgba(255, 255, 255, 0.5);
+
+// ─── Breakpoints ───────────────────────────────────────────────────────────────
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+// ─── Transitions ───────────────────────────────────────────────────────────────
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 400ms ease;
+
+// ─── Weather Background Gradients ─────────────────────────────────────────────
+$bg-clear-day: linear-gradient(
+  180deg,
+  #1565c0 0%,
+  #1976d2 30%,
+  #42a5f5 70%,
+  #90caf9 100%
+);
+$bg-clear-night: linear-gradient(
+  180deg,
+  #050d1a 0%,
+  #0a1628 30%,
+  #0d2040 70%,
+  #1a3060 100%
+);
+$bg-partly-cloudy: linear-gradient(
+  180deg,
+  #1976d2 0%,
+  #2196f3 40%,
+  #64b5f6 80%,
+  #b3d9fb 100%
+);
+$bg-partly-cloudy-night: linear-gradient(
+  180deg,
+  #0a1628 0%,
+  #0f2040 40%,
+  #1a3060 80%,
+  #1e3a70 100%
+);
+$bg-cloudy: linear-gradient(
+  180deg,
+  #37474f 0%,
+  #546e7a 40%,
+  #78909c 80%,
+  #90a4ae 100%
+);
+$bg-fog: linear-gradient(
+  180deg,
+  #607d8b 0%,
+  #78909c 40%,
+  #90a4ae 80%,
+  #b0bec5 100%
+);
+$bg-drizzle: linear-gradient(
+  180deg,
+  #1a3a5c 0%,
+  #2a5280 40%,
+  #3d6e9e 80%,
+  #5a8ab8 100%
+);
+$bg-rain: linear-gradient(
+  180deg,
+  #0d2035 0%,
+  #1a3050 40%,
+  #25456a 80%,
+  #304f75 100%
+);
+$bg-snow: linear-gradient(
+  180deg,
+  #78909c 0%,
+  #90a4ae 30%,
+  #b0bec5 60%,
+  #dde8f0 100%
+);
+$bg-storm: linear-gradient(
+  180deg,
+  #080e18 0%,
+  #121c2e 40%,
+  #1a2840 80%,
+  #202f4a 100%
+);

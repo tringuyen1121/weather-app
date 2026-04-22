@@ -1,0 +1,73 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.section {
+  @include m.flex-col;
+  gap: v.$space-4;
+}
+
+.heading {
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: v.$text-muted;
+  padding: 0 v.$space-2;
+}
+
+.scroll {
+  @include m.custom-scrollbar;
+  display: flex;
+  gap: v.$space-3;
+  overflow-x: auto;
+  padding-bottom: v.$space-2;
+}
+
+.card {
+  @include m.glass-card(v.$radius-xl);
+  @include m.flex-col;
+  @include m.flex-center;
+  gap: v.$space-2;
+  padding: v.$space-4 v.$space-5;
+  min-width: 80px;
+  flex-shrink: 0;
+  transition:
+    background v.$transition-base,
+    transform v.$transition-base;
+  cursor: default;
+
+  &:hover {
+    background: v.$glass-bg-hover;
+    transform: translateY(-3px);
+  }
+}
+
+.now {
+  background: v.$glass-bg-strong;
+  border-color: v.$glass-border-strong;
+}
+
+.time {
+  font-size: v.$font-size-xs;
+  font-weight: 600;
+  color: v.$text-secondary;
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.temp {
+  font-size: v.$font-size-base;
+  font-weight: 600;
+  color: v.$text-primary;
+  white-space: nowrap;
+}
+
+.precip {
+  font-size: v.$font-size-xs;
+  color: #90caf9;
+  white-space: nowrap;
+}

@@ -1,0 +1,220 @@
+@use "./styles/variables" as v;
+@use "./styles/mixins" as m;
+
+// ─── Background Themes ────────────────────────────────────────────────────────
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  transition: background 1s ease;
+}
+
+.clear_day {
+  background: v.$bg-clear-day;
+}
+.clear_night {
+  background: v.$bg-clear-night;
+}
+.partly_cloudy {
+  background: v.$bg-partly-cloudy;
+}
+.partly_cloudy_night {
+  background: v.$bg-partly-cloudy-night;
+}
+.cloudy {
+  background: v.$bg-cloudy;
+}
+.fog {
+  background: v.$bg-fog;
+}
+.drizzle {
+  background: v.$bg-drizzle;
+}
+.rain {
+  background: v.$bg-rain;
+}
+.snow {
+  background: v.$bg-snow;
+}
+.storm {
+  background: v.$bg-storm;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid v.$glass-border;
+  padding: v.$space-4 v.$space-4;
+
+  @include m.md {
+    padding: v.$space-4 v.$space-8;
+  }
+}
+
+.headerInner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+
+  @include m.sm {
+    flex-direction: row;
+    align-items: center;
+    gap: v.$space-6;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  flex-shrink: 0;
+  font-size: v.$font-size-xl;
+}
+
+.brandName {
+  font-size: v.$font-size-lg;
+  font-weight: 700;
+  color: v.$text-primary;
+  letter-spacing: -0.02em;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  flex: 1;
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+.main {
+  flex: 1;
+  padding: v.$space-8 v.$space-4;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include m.md {
+    padding: v.$space-10 v.$space-8;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Empty State ──────────────────────────────────────────────────────────────
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  gap: v.$space-4;
+  min-height: 50vh;
+}
+
+.emptyIcon {
+  font-size: 5rem;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.emptyTitle {
+  font-size: v.$font-size-2xl;
+  font-weight: 700;
+  color: v.$text-primary;
+}
+
+.emptyText {
+  font-size: v.$font-size-base;
+  color: v.$text-secondary;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+// ─── Loading ─────────────────────────────────────────────────────────────────
+.loading {
+  @include m.flex-col;
+  @include m.flex-center;
+  gap: v.$space-4;
+  min-height: 50vh;
+  color: v.$text-secondary;
+  font-size: v.$font-size-base;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Error Banner ─────────────────────────────────────────────────────────────
+.errorBanner {
+  background: rgba(239, 83, 80, 0.2);
+  border: 1px solid rgba(239, 83, 80, 0.4);
+  border-radius: v.$radius-lg;
+  padding: v.$space-4 v.$space-5;
+  color: v.$text-primary;
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$space-4;
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.footer {
+  text-align: center;
+  padding: v.$space-6 v.$space-4;
+  font-size: v.$font-size-xs;
+  color: v.$text-muted;
+  border-top: 1px solid v.$glass-border;
+}
+
+.footerLink {
+  color: v.$text-secondary;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover {
+    color: v.$text-primary;
+  }
+}

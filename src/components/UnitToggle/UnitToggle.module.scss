@@ -1,0 +1,36 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.toggle {
+  @include m.glass-card(v.$radius-full);
+  @include m.flex-center;
+  @include m.focus-ring;
+  gap: v.$space-2;
+  padding: v.$space-2 v.$space-4;
+  cursor: pointer;
+  transition:
+    background v.$transition-base,
+    border-color v.$transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: v.$glass-bg-hover;
+    border-color: v.$glass-border-strong;
+  }
+}
+
+.option {
+  font-size: v.$font-size-base;
+  font-weight: 600;
+  color: v.$text-muted;
+  transition: color v.$transition-fast;
+
+  &.active {
+    color: v.$text-primary;
+  }
+}
+
+.divider {
+  color: v.$glass-border;
+  font-weight: 300;
+}

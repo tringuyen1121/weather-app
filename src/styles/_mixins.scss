@@ -1,0 +1,93 @@
+@use "variables" as v;
+
+// ─── Responsive Breakpoints ────────────────────────────────────────────────────
+@mixin sm {
+  @media (min-width: v.$bp-sm) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: v.$bp-md) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: v.$bp-lg) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: v.$bp-xl) {
+    @content;
+  }
+}
+
+// ─── Glass Card ────────────────────────────────────────────────────────────────
+@mixin glass-card($border-radius: v.$radius-xl) {
+  background: v.$glass-bg;
+  backdrop-filter: v.$glass-blur;
+  -webkit-backdrop-filter: v.$glass-blur;
+  border: 1px solid v.$glass-border;
+  border-radius: $border-radius;
+  box-shadow: v.$glass-shadow;
+}
+
+@mixin glass-card-hover {
+  &:hover {
+    background: v.$glass-bg-hover;
+    border-color: v.$glass-border-strong;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// ─── Flex Helpers ──────────────────────────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Text Truncation ──────────────────────────────────────────────────────────
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─── Scrollbar ────────────────────────────────────────────────────────────────
+@mixin custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: v.$radius-full;
+  }
+}
+
+// ─── Focus Ring ────────────────────────────────────────────────────────────────
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+  }
+}
