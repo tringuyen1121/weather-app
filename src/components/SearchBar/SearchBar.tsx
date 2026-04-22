@@ -9,11 +9,11 @@ interface SearchBarProps {
   geolocating: boolean;
 }
 
-export function SearchBar({
+const SearchBar = ({
   onSelectLocation,
   onGeolocate,
   geolocating,
-}: SearchBarProps) {
+}: SearchBarProps) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -109,4 +109,6 @@ export function SearchBar({
       )}
     </div>
   );
-}
+};
+
+export default SearchBar;

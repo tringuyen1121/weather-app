@@ -15,7 +15,7 @@ interface DetailCardProps {
   sub?: string;
 }
 
-function DetailCard({ icon, label, value, sub }: DetailCardProps) {
+const DetailCard = ({ icon, label, value, sub }: DetailCardProps) => {
   return (
     <div className={styles.card}>
       <span className={styles.icon} role="img" aria-hidden="true">
@@ -26,24 +26,30 @@ function DetailCard({ icon, label, value, sub }: DetailCardProps) {
       {sub && <span className={styles.sub}>{sub}</span>}
     </div>
   );
-}
+};
 
-export function WeatherDetails({ current, daily }: WeatherDetailsProps) {
+const getUVLabel = (uvIndex: number): string => {
+  if (uvIndex <= 2) return "Low";
+  if (uvIndex <= 5) return "Moderate";
+  if (uvIndex <= 7) return "High";
+  if (uvIndex <= 10) return "Very High";
+  return "Extreme";
+};
+
+const getCloudCoverDescription = (cloudCover: number): string => {
+  if (cloudCover < 20) return "Clear";
+  if (cloudCover < 50) return "Partly cloudy";
+  if (cloudCover < 80) return "Mostly cloudy";
+  return "Overcast";
+};
+
+const WeatherDetails = ({ current, daily }: WeatherDetailsProps) => {
   const { isMetric } = useUnit();
   const windUnit = isMetric ? "km/h" : "mph";
   const precipUnit = isMetric ? "mm" : "in";
 
   const uvIndex = daily.uv_index_max[0] ?? 0;
-  const uvLabel =
-    uvIndex <= 2
-      ? "Low"
-      : uvIndex <= 5
-        ? "Moderate"
-        : uvIndex <= 7
-          ? "High"
-          : uvIndex <= 10
-            ? "Very High"
-            : "Extreme";
+  const uvLabel = getUVLabel(uvIndex);
 
   return (
     <section className={styles.section} aria-label="Weather details">
@@ -53,13 +59,7 @@ export function WeatherDetails({ current, daily }: WeatherDetailsProps) {
           icon="💧"
           label="Humidity"
           value={`${current.relative_humidity}%`}
-          sub={
-            current.relative_humidity < 30
-              ? "Dry"
-              : current.relative_humidity < 60
-                ? "Comfortable"
-                : "Humid"
-          }
+          sub={current.relative_humidity < 30 ? "Dry" : "Humid"}
         />
         <DetailCard
           icon="💨"
@@ -74,24 +74,14 @@ export function WeatherDetails({ current, daily }: WeatherDetailsProps) {
           sub={
             current.apparent_temperature < current.temperature
               ? "Feels colder"
-              : current.apparent_temperature > current.temperature
-                ? "Feels warmer"
-                : "True to temperature"
+              : "Feels warmer"
           }
         />
         <DetailCard
           icon="☁️"
           label="Cloud Cover"
           value={`${current.cloud_cover}%`}
-          sub={
-            current.cloud_cover < 20
-              ? "Clear"
-              : current.cloud_cover < 50
-                ? "Partly cloudy"
-                : current.cloud_cover < 80
-                  ? "Mostly cloudy"
-                  : "Overcast"
-          }
+          sub={getCloudCoverDescription(current.cloud_cover)}
         />
         <DetailCard
           icon="🌧️"
@@ -118,4 +108,6 @@ export function WeatherDetails({ current, daily }: WeatherDetailsProps) {
       </div>
     </section>
   );
-}
+};
+
+export default WeatherDetails;

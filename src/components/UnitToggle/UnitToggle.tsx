@@ -1,7 +1,7 @@
 import { useUnit } from "../../context/UnitContext";
 import styles from "./UnitToggle.module.scss";
 
-export function UnitToggle() {
+const UnitToggle = () => {
   const { isMetric, toggleUnits } = useUnit();
 
   return (
@@ -22,4 +22,6 @@ export function UnitToggle() {
       </span>
     </button>
   );
-}
+};
+
+export default UnitToggle;

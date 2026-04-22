@@ -16,11 +16,11 @@ interface CurrentWeatherProps {
   dailyHighLow?: { high: number; low: number };
 }
 
-export function CurrentWeather({
+const CurrentWeather = ({
   data,
   location,
   dailyHighLow,
-}: CurrentWeatherProps) {
+}: CurrentWeatherProps) => {
   const { isMetric } = useUnit();
   const weather = getWeatherInfo(data.weather_code, data.is_day === 1);
 
@@ -38,15 +38,17 @@ export function CurrentWeather({
     day: "numeric",
   });
 
+  const locationName = [location.admin1, location.country]
+    .filter(Boolean)
+    .join(", ");
+
   return (
     <div className={styles.card}>
       <div className={styles.location}>
         <span className={styles.locationIcon}>📍</span>
         <div>
           <h1 className={styles.city}>{location.name}</h1>
-          <p className={styles.region}>
-            {[location.admin1, location.country].filter(Boolean).join(", ")}
-          </p>
+          <p className={styles.region}>{locationName}</p>
         </div>
       </div>
 
@@ -65,18 +67,14 @@ export function CurrentWeather({
           </span>
           {dailyHighLow && (
             <span className={styles.highLow}>
-              H:{round(dailyHighLow.high)}
-              {tempUnit} · L:{round(dailyHighLow.low)}
-              {tempUnit}
+              {`H:${round(dailyHighLow.high)}${tempUnit} · L:${round(dailyHighLow.low)}${tempUnit}`}
             </span>
           )}
         </div>
       </div>
 
       <p className={styles.description}>{weather.description}</p>
-      <p className={styles.datetime}>
-        {dateStr} · {timeStr}
-      </p>
+      <p className={styles.datetime}>{`${dateStr} · ${timeStr}`}</p>
 
       <div className={styles.quickStats}>
         <div className={styles.stat}>
@@ -84,8 +82,7 @@ export function CurrentWeather({
           <div>
             <span className={styles.statLabel}>Feels like</span>
             <span className={styles.statValue}>
-              {round(data.apparent_temperature)}
-              {tempUnit}
+              {`${round(data.apparent_temperature)}${tempUnit}`}
             </span>
           </div>
         </div>
@@ -101,12 +98,13 @@ export function CurrentWeather({
           <div>
             <span className={styles.statLabel}>Wind</span>
             <span className={styles.statValue}>
-              {round(data.wind_speed)} {windUnit}{" "}
-              {getWindDirection(data.wind_direction)}
+              {`${round(data.wind_speed)}${windUnit} ${getWindDirection(data.wind_direction)}`}
             </span>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default CurrentWeather;

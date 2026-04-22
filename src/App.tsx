@@ -1,19 +1,19 @@
 import { useState, useCallback } from "react";
 import { UnitProvider, useUnit } from "./context/UnitContext";
 import { useWeather } from "./hooks/useWeather";
-import { SearchBar } from "./components/SearchBar/SearchBar";
-import { CurrentWeather } from "./components/CurrentWeather/CurrentWeather";
-import { HourlyForecast } from "./components/HourlyForecast/HourlyForecast";
-import { DailyForecast } from "./components/DailyForecast/DailyForecast";
-import { WeatherDetails } from "./components/WeatherDetails/WeatherDetails";
-import { UnitToggle } from "./components/UnitToggle/UnitToggle";
+import SearchBar from "./components/SearchBar/SearchBar";
+import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+import HourlyForecast from "./components/HourlyForecast/HourlyForecast";
+import DailyForecast from "./components/DailyForecast/DailyForecast";
+import WeatherDetails from "./components/WeatherDetails/WeatherDetails";
+import UnitToggle from "./components/UnitToggle/UnitToggle";
 import { getWeatherInfo } from "./utils/weatherCodes";
 import type { Location } from "./types/weather";
 import styles from "./App.module.scss";
 
 const STORAGE_KEY = "weather-display:location";
 
-function WeatherApp() {
+const WeatherApp = () => {
   const { units } = useUnit();
 
   const [location, setLocation] = useState<Location | null>(() => {
@@ -40,7 +40,7 @@ function WeatherApp() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(loc));
     } catch {
-      /* storage may be unavailable */
+      console.error("Failed to save location to localStorage");
     }
   }
 
@@ -151,24 +151,9 @@ function WeatherApp() {
           </div>
         )}
       </main>
-
-      <footer className={styles.footer}>
-        <p>
-          Weather data from{" "}
-          <a
-            href="https://open-meteo.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.footerLink}
-          >
-            Open-Meteo
-          </a>{" "}
-          · Free &amp; Open Source
-        </p>
-      </footer>
     </div>
   );
-}
+};
 
 export default function App() {
   return (

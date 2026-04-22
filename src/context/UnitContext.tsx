@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import type { Units } from "../types/weather";
 
 interface UnitContextType {
@@ -21,24 +21,26 @@ const IMPERIAL: Units = {
 
 const UnitContext = createContext<UnitContextType | null>(null);
 
-export function UnitProvider({ children }: { children: React.ReactNode }) {
+export const UnitProvider = ({ children }: { children: React.ReactNode }) => {
   const [isMetric, setIsMetric] = useState(true);
+
+  const toggleUnits = useCallback(() => setIsMetric((v) => !v), []);
 
   return (
     <UnitContext.Provider
       value={{
         units: isMetric ? METRIC : IMPERIAL,
         isMetric,
-        toggleUnits: () => setIsMetric((v) => !v),
+        toggleUnits,
       }}
     >
       {children}
     </UnitContext.Provider>
   );
-}
+};
 
-export function useUnit(): UnitContextType {
+export const useUnit = (): UnitContextType => {
   const ctx = useContext(UnitContext);
   if (!ctx) throw new Error("useUnit must be used within UnitProvider");
   return ctx;
-}
+};
