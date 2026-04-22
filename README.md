@@ -17,14 +17,14 @@ A modern weather application built with React, TypeScript, and Sass that integra
 
 ## Tech Stack
 
-| Layer       | Choice                           |
-| ----------- | -------------------------------- |
-| Framework   | React 19                         |
-| Language    | TypeScript (strict)              |
-| Styles      | Sass + CSS Modules               |
-| Build       | Vite                             |
-| CI/CD       | GitHub Actions → GitHub Pages    |
-| Weather API | Open-Meteo (free, no key needed) |
+| Layer       | Choice                        |
+| ----------- | ----------------------------- |
+| Framework   | React 19                      |
+| Language    | TypeScript (strict)           |
+| Styles      | Sass + CSS Modules            |
+| Build       | Vite                          |
+| CI/CD       | GitHub Actions → GitHub Pages |
+| Weather API | Open-Meteo                    |
 
 ## Project Structure
 
@@ -65,7 +65,7 @@ src/
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/weather-display.git
+git clone https://github.com/tringuyen1121/weather-app.git
 cd weather-display
 
 # Install dependencies
